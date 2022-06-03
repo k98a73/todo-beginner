@@ -3,7 +3,7 @@ import "./reset.css";
 import "./styles.css";
 
 export const App = () => {
-  const [todoText, setTodotext] = useState("");
+  const [todoText, setTodoText] = useState("");
   const [todos, setTodos] = useState([]);
   const filterOptions = [
     { value: "all", label: "すべて" },
@@ -12,13 +12,13 @@ export const App = () => {
     { value: "done", label: "完了" },
   ];
 
-  const onChangeTodoText = (event) => setTodotext(event.target.value);
+  const onChangeTodoText = (event) => setTodoText(event.target.value);
 
   const onClickAdd = () => {
     if (todoText === "") return;
     const newTodos = [...todos, todoText];
     setTodos(newTodos);
-    setTodotext("");
+    setTodoText("");
   };
 
   const onClickDelete = (index) => {
@@ -42,14 +42,16 @@ export const App = () => {
         <ul>
           {todos.map((todo, index) => {
             return (
-              <li>
-                <div key={todo} className="list-row">
+              <li key={todo.toString()}>
+                <div className="list-row">
                   <p>
                     id:{index + 1} {todo}
                   </p>
                   <select>
                     {filterOptions.map(({ value, label }) => (
-                      <option value={value}>{label}</option>
+                      <option key={label} value={value}>
+                        {label}
+                      </option>
                     ))}
                   </select>
                   <button onClick={() => onClickDelete(index)}>削除</button>
